@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Macro Calculator</title>
+</head>
+<body>
+    <h1>Macro Calculator</h1>
+    <form id="macroForm">
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" name="weight" required><br><br>
+        
+        <label for="goal">Select your goal:</label>
+        <select id="goal" name="goal" required>
+            <option value="fatLoss">Fat Loss</option>
+            <option value="muscleGain">Muscle Gain</option>
+        </select><br><br>
+        
+        <button type="button" onclick="calculate()">Calculate</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function calculate() {
+            var weight = document.getElementById("weight").value;
+            var goal = document.getElementById("goal").value;
+            var calories;
+			var oldcalories;
+            var protein;
+            var fat;
+            var carbs;
+
+			oldcalories=weight *31;
+            // Calculate Calories
+            if (goal === "fatLoss") {
+                calories = weight * 31 - 500;
+            } else if (goal === "muscleGain") {
+                calories = weight * 31 + 350;
+            }
+
+            // Calculate Protein, Fat, Carbs
+            protein = weight * 2;
+            fat = (oldcalories * 0.3) / 9;
+            carbs = (oldcalories / 2.2) / 4;
+
+            // Display Results
+            var resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "<h2>Results</h2>" +
+                "<p>Calories: " + calories + "</p>" +
+                "<p>Protein: " + protein + "g/day</p>" +
+                "<p>Fat: " + fat.toFixed(1) + "g/day</p>" +
+                "<p>Carbs: " + carbs.toFixed(1) + "g/day</p>";
+        }
+    </script>
+</body>
+</html>
